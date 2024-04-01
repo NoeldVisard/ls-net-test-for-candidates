@@ -1,0 +1,14 @@
+SELECT tr.id, tr.user_id, tr.date, SUM(t.amount)
+FROM transactions tr
+INNER JOIN transactions t on
+    tr.user_id = t.user_id
+        AND t.id <= tr.id
+GROUP BY tr.id;
+
+-- result:
+-- 1,1,2024-01-03,150
+-- 2,2,2024-01-03,278
+-- 3,2,2024-01-04,364
+-- 4,2,2024-01-05,398
+-- 5,1,2024-01-06,105
+-- 6,3,2024-01-06,64
